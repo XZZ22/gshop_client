@@ -1,18 +1,20 @@
 <template>
   <div>
     <router-view/>
-    <FooterGuide/>
+    <FooterGuide v-show="$route.meta.showFooter"></FooterGuide>
   </div>
 </template>
 
 <script>
   import FooterGuide from './components/FooterGuide/FooterGuide.vue'
-  export default {
-    data(){
-      return{
 
-      }
-    },
+  //测试
+  // import {reqSendcode} from './api'
+  export default {
+    // async mounted(){
+    //   const result = await reqSendcode(15231627695)
+    //   console.log(result)
+    // },
     components:{
       FooterGuide
     }
