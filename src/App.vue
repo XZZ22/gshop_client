@@ -8,13 +8,10 @@
 <script>
   import FooterGuide from './components/FooterGuide/FooterGuide.vue'
 
-  //测试
-  // import {reqSendcode} from './api'
   export default {
-    // async mounted(){
-    //   const result = await reqSendcode(15231627695)
-    //   console.log(result)
-    // },
+    mounted(){
+      this.$store.dispatch('getAddress')
+    },
     components:{
       FooterGuide
     }

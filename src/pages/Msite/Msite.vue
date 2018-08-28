@@ -1,7 +1,7 @@
 <template>
   <div class="msite">
     <!--首页头部-->
-    <HeaderTop title="昌平区北七家宏福科技园(337省道北)">
+    <HeaderTop :title="address.name">
       <a class="header_search" slot="left">
         <i class="iconfont icon-sousuo"></i>
       </a>
@@ -134,6 +134,7 @@
   import 'swiper/dist/css/swiper.min.css'
 
   import ShopList from '../../components/ShopList/ShopList.vue'
+  import {mapState} from 'vuex'
 
   export default {
 
@@ -144,6 +145,9 @@
           el: '.swiper-pagination'
         }
       })
+    },
+    computed:{
+      ...mapState(['address'])
     },
 
     components: {
