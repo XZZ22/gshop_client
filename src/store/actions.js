@@ -1,4 +1,4 @@
-import {RECEIVE_ADDRESS,RECEIVE_CATEGORYS,RECEIVE_SHOPS} from "./mutation-types";
+import {RECEIVE_ADDRESS,RECEIVE_CATEGORYS,RECEIVE_SHOPS,RECEIVE_USER} from "./mutation-types";
 
 import {
   reqAddress,
@@ -29,5 +29,9 @@ export default {
     const result = await reqShops({latitude,longitude})
     const shops = result.data
     commit(RECEIVE_SHOPS,{shops})
+  },
+
+  saveUser({commit},{user}){
+    commit(RECEIVE_USER,{user})
   }
 }

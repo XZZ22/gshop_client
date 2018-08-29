@@ -7,14 +7,14 @@
           <!--<span class="header_title_text">我的</span>-->
         <!--</a>-->
       <!--</header>-->
-      <router-link to="/login">
+      <router-link :to="user._id ?'/userinfo':'/login'">
         <section class="profile-number">
           <a href="javascript:" class="profile-link">
             <div class="profile_image">
               <i class="iconfont icon-person"></i>
             </div>
             <div class="user-info">
-              <p class="user-info-top">登录/注册</p>
+              <p class="user-info-top"v-if="!user.phone">{{user.name ? user.name :'登录/注册'}}</p>
               <p>
                 <span class="user-icon">
                   <i class="iconfont icon-shouji icon-mobile"></i>
@@ -102,9 +102,11 @@
 </template>
 
 <script>
+
+  import {mapState} from 'vuex'
   export default {
-    data() {
-      return {}
+    computed:{
+      ...mapState(['user'])
     }
   }
 </script>
