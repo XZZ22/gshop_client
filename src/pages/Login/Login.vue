@@ -43,7 +43,7 @@
                 <input type="text" maxlength="11" placeholder="验证码" v-model="captcha">
                 <img class="get_verification"
                      src="http://localhost:4000/captcha" alt="captcha"
-                     @click="updateCaptcha">
+                     @click="updateCaptcha" ref="captcha">
               </section>
             </section>
           </div>
@@ -104,8 +104,8 @@
         }
       },
 
-      updateCaptcha(event){
-        event.target.src='http://localhost:4000/captcha?time='+Date.now()
+      updateCaptcha(){
+        this.refs.captcha.src='http://localhost:4000/captcha?time='+Date.now()
       },
 
       //登录
