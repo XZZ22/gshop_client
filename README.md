@@ -1,98 +1,74 @@
 # day01
+## 1. 项目开发准备
+    项目描述
+    技术选型
+    API接口
 
-##主要内容：静态页面的实现
+## 2. 开启项目开发
+    使用脚手架创建项目
+    安装所有依赖/指定依赖
+    开发环境运行
+    生产环境打包与发布
 
-  一、html静态页面： 
+## 3. 搭建项目整体界面结构
+    stylus的理解和使用
+        结构化, 变量, 函数/minxin(混合)
+    vue-router的理解和使用
+        $router: 路由器对象, 包含一些操作路由的功能函数, 来实现编程式导航(跳转路由)
+        $route: 当前路由对象, 一些当前路由信息数据的容器, path/meta/query/params
+    项目路由拆分
+    底部导航组件: FooterGuide
+    导航路由组件: Msite/Search/Order/Profile
 
-    1) 图片Base64: 样式中引用的小图片, 在webpack打包会自动处理转换为样式内部的Base64编码字符串 
-
-    2) 2x与3x图: 不同手机的屏幕密度不一样, 一般都在2以上(如iphone6为2,iphone6s为3), 为了适配不同的手机, UI设计师为同一个图片制作了2x和3x的2套图片(图形一样, 但大小不一样) 
-
-    3）1px像素的实现 
-
-    4）清除浮动
-
-二、字体库的引用： iconfont字体图标 
-  a. 目前国内用的最多的是阿里巴巴矢量库（http://www.iconfont.cn/）
-
-三、语法检查：eslint,jslint,jshint
-
-四、移动端
-
-  1) viewport
-
-    <meta name="viewport"
-      content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
-  2)解决点击响应延时0.2s问题
-
-    <script src="https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
-    <script>
-      if ('addEventListener' in document) {
-        document.addEventListener('DOMContentLoaded', function() {
-          FastClick.attach(document.body);
-        }, false);
-      }
-      if(!window.Promise) {
-        document.writeln('<script src="https://as.alipayobjects.com/g/component/es6-promise/3.2.2/es6-promise.min.js"'+'>'+'<'+'/'+'script>');
-      }
-    </script>
+## 4. 抽取组件
+    头部组件: HeaderTop, 通过slot来实现组件通信标签结构
+    商家列表组件: ShopList
     
-五、实现底部导航 ----vue-router的使用
+## 5. 登陆路由组件
+     静态组件
+     FooterGuide的显示/隐藏: 通过路由的meta
 
-    说明：
-    1) 通过编程式导航实现路由的切换显示($router)
-    2) 通过动态class和$route.path来实现tab样式切换
-    3) 通过阿里图标库, 显示导航图标
-    通过判断$route.path 的路径名称，判断当前的class属性on是否显示。
-    点击事件：@click='goto(path)'  ，methods：{goto（path）{}}
-    
-六、Msite组件等四个路由组件的静态实现
+## 6. 接口相关
+    运行后台项目(启动mongodb服务), 
+    使用postman测试后台接口, 如果不一致, 修改接口文档
+	封装ajax: 
+		promise+axios封装ajax请求的函数
+		封装每个接口对应的请求函数(能根据接口定义ajax请求函数)
+		解决ajax的跨越域问题: 配置代理, 对代理的理解
 
-七、使用swiper实现图片轮播
+## 7. 异步显示数据
+    封装ajax: 
+        promise+axios封装ajax请求的函数
+        封装每个接口对应的请求函数(能根据接口定义ajax请求函数)
+        解决ajax的跨越域问题: 配置代理, 对代理的理解
+    vuex编码
+        创建所有相关的模块: store/index|state|mutations|actions|getters|mutation-types
+        设计state: 从后台获取的数据
+        实现actions: 
+            定义异步action: async/await
+            流程:　发ajax获取数据, commit给mutation
+        实现mutations: 给状态赋值
+        实现index: 创建store对象
+        main.js: 配置store
+    组件异步显示数据
+        在mounted()通过$store.dispatch('actionName')来异步获取后台数据到state中
+        mapState(['xxx'])读取state中数据到组件中
+        在模板中显示xxx的数据
+        
+# day02
 
-    地址: http://www.swiper.com.cn/
-    下载: npm install --save swiper
-    <script>
-      import Swiper from 'swiper'
-      import 'swiper/dist/css/swiper.min.css'
-      export default {
-        mounted () {
-          new Swiper('.swiper-container', {
-            pagination: {
-              el: '.swiper-pagination',
-            },
-            loop: true
-          })
-        }
-      }
-    </script>
-八、抽取HeaderTop组件 -----主要为了使用slot
+## 登陆/注册功能
+### 1. 前台交互效果
+    1). 切换登陆方式
+    2). 手机号验证
+    3). 倒计时效果
+    4). 密码的显示/隐藏切换
 
-九、抽取ShopList组件(静态)
-
-十、定义Login组件(静态)，配置路由
-
-十一、控制Footer的显示隐藏 ----路由中的meta属性
-
-    使用：
-    1) App.vue
-    <FooterGuide v-show="$route.meta.showFooter"></FooterGuide>
-    
-# 主要内容：后台接口的实现
-
-一、接口文档
-
-    目录：
-    [1、根据经纬度获取位置详情](#1根据经纬度获取位置详情)<br/>
-    [2、获取食品分类列表](#2获取食品分类列表)<br/>
-    [3、根据经纬度获取商铺列表](#3根据经纬度获取商铺列表)<br/>
-    [4、根据经纬度和关键字搜索商铺列表](#4根据经纬度和关键字搜索商铺列表)<br/>
-    [5、获取一次性验证码](#5获取一次性验证码)<br/>
-    [6、用户名密码登陆](#6用户名密码登陆)<br/>
-    [7、发送短信验证码](#7发送短信验证码)<br/>
-    [8、手机号验证码登陆](#8手机号验证码登陆)<br/>
-    [9、根据会话获取用户信息](#9根据会话获取用户信息)<br/>
-    [10、用户登出](#10用户登出)<br/>
-    
-二、使用vuex管理状态 
-    npm install --save vuex
+### 2. 前后台交互效果
+    1). 一次性图形验证码
+    2). 发送一次性短信验证码
+    3). 短信登陆
+    4). 密码登陆
+    5). 自动登陆
+    6). 退出登陆        
+      
