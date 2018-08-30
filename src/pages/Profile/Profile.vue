@@ -19,7 +19,9 @@
                 <span class="user-icon">
                   <i class="iconfont icon-shouji icon-mobile"></i>
                 </span>
-                <span class="icon-mobile-number">暂无绑定手机号</span>
+                <span class="icon-mobile-number">
+                  {{user.phone ? user.phone:'暂无绑定手机号'}}
+                </span>
               </p>
             </div>
             <span class="arrow">
@@ -97,6 +99,11 @@
           </div>
         </a>
       </section>
+
+      <section class="profile_my_order border-1px" v-show="user._id">
+        <mt-button type="danger" style="width: 100%" @click="logout">退出登陆</mt-button>
+      </section>
+
     </section>
   </div>
 </template>
@@ -104,9 +111,22 @@
 <script>
 
   import {mapState} from 'vuex'
+
+  import {MessageBox} from 'mint-ui'
+
   export default {
     computed:{
       ...mapState(['user'])
+    },
+
+    methods:{
+      logout(){
+        MessageBox.confirm('确定退出吗?').then(action => {
+          this.$store.dispatch('loginOut')
+        },action => {
+          console.log('取消了')
+        })
+      }
     }
   }
 </script>

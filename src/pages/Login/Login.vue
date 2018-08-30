@@ -19,7 +19,7 @@
                 </button>
             </section>
             <section class="login_verification">
-              <input type="tel" maxlength="8" placeholder="验证码">
+              <input type="tel" maxlength="8" placeholder="验证码" v-model="code">
             </section>
             <section class="login_hint">
               温馨提示：未注册硅谷外卖帐号的手机号，登录时将自动注册，且代表已同意
@@ -105,7 +105,7 @@
       },
 
       updateCaptcha(){
-        this.refs.captcha.src='http://localhost:4000/captcha?time='+Date.now()
+        this.$refs.captcha.src='http://localhost:4000/captcha?time='+Date.now()
       },
 
       //登录
@@ -126,11 +126,13 @@
           }
           result = await reqPwdLogin({name,pwd,captcha})
           //2、发送请求
+          this.updateCaptcha()
         }else{  //短信登录 phone,code
           if(!this.isRightPhone){
             MessageBox.alert('请输入正确的手机号')
             return
-          }else if(/^\d{6}$/.test(code)){
+          }else if(!/^\d{6}$/.test(code)){
+            console.log(code)
             MessageBox.alert('请输入正确的短信验证码')
             return
           }

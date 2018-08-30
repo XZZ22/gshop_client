@@ -1,9 +1,11 @@
-import {RECEIVE_ADDRESS,RECEIVE_CATEGORYS,RECEIVE_SHOPS,RECEIVE_USER} from "./mutation-types";
+import {RECEIVE_ADDRESS,RECEIVE_CATEGORYS,RECEIVE_SHOPS,RECEIVE_USER,RESET_USER} from "./mutation-types";
 
 import {
   reqAddress,
   reqCategorys,
-  reqShops
+  reqShops,
+  reqUser,
+  resetUser
 } from "../api";
 
 export default {
@@ -31,7 +33,25 @@ export default {
     commit(RECEIVE_SHOPS,{shops})
   },
 
+  //同步保存用户信息
   saveUser({commit},{user}){
     commit(RECEIVE_USER,{user})
+  },
+
+  //异步获取用户
+  async getUser({commit}){
+    const result = await reqUser()
+    if(result.code ===0){
+      const user = result.data
+      commit(RECEIVE_USER,{user})
+    }
+  },
+
+  //退出，同步
+  async loginOut({commit}){
+    const result = await resetUser()
+    if(result.code === 0){
+      commit(RESET_USER)
+    }
   }
 }
