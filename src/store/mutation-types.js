@@ -6,3 +6,5 @@ export const RESET_USER = 'reset_user' //退出用户登录
 export const RECEIVE_GOODS = 'receive_goods' //接收shop中的商品信息
 export const RECEIVE_INFO = 'receive_info' //接收shop中的商家信息
 export const RECEIVE_RATINGS = 'receive_ratings' //接收shop中的评分信息
+export const INCREMENT_FOOD_COUNT = 'increment_food_count' //购物车加
+export const DECREMENT_FOOD_COUNT = 'decrement_food_count'  //购物车减

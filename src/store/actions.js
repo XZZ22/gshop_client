@@ -6,7 +6,9 @@ import {
   RESET_USER,
   RECEIVE_GOODS,
   RECEIVE_INFO,
-  RECEIVE_RATINGS
+  RECEIVE_RATINGS,
+  INCREMENT_FOOD_COUNT,
+  DECREMENT_FOOD_COUNT
 } from "./mutation-types";
 
 import {
@@ -92,6 +94,14 @@ export default {
     if(result.code ===0){
       const ratings = result.data
       commit(RECEIVE_RATINGS,{ratings})
+    }
+  },
+
+  async updateFoodCount({commit},{food,isAdd}){
+    if(isAdd){
+      commit(INCREMENT_FOOD_COUNT,{food})
+    }else{
+      commit(DECREMENT_FOOD_COUNT,{food})
     }
   }
 }
