@@ -8,15 +8,11 @@
 <script>
   import FooterGuide from './components/FooterGuide/FooterGuide.vue'
 
-  import axios from 'axios'
   export default {
     mounted(){
       this.$store.dispatch('getAddress')
       this.$store.dispatch('getUser')
 
-      axios.get('/goods').then(response=>{
-        console.log(response.data)
-      })
     },
     components:{
       FooterGuide
