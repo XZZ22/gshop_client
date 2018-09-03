@@ -21,6 +21,9 @@
   import ShopHeader  from '../../components/ShopHeader/ShopHeader.vue'
 
   export default {
+      props:{
+        shops:Array
+      },
 
     mounted(){
       this.$store.dispatch('getShopInfo')

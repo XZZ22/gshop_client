@@ -125,11 +125,42 @@
       6). 退出登陆
 
 #day03
-##
+##1、更新登录状态
+      5). 自动登陆
+        App.vue中分发获取用户的异步action，由mutation直接获取
+      6). 退出登陆
+        由于这次缓存的用户信息存放在session中，所以退出登录清除用户信息需要发送ajax请求
+        如果是保存在cookie中，则不需要发送ajax请求
 
+##2、Shop组件
+    shopGoods/shopInfo/shopRaings ---> 设置路由
+
+##3、利用mockjs模拟数据
+    (1)mockjs：生成随机数据，拦截ajax请求
+    (2)json数据是什么？
+        是一种用来存储结构化数据的文本数据结构
+        优点：小巧，可以轻松与js交互
+        整体类型：
+            json对象: {}, 与js对象对应
+        		json数组: []  与js数组对应
+        组成：
+            结构：类型与名称
+            值
+        模拟json数据
+            与真实的json数据在结构上要相同，但是值可以不同
 
 #day04
-1、
+1、route-link的路由跳转中，默认的to中设置的路由是push，可以改成replace
 2、获取商家信息info
+  (1)v-if : 如果内容还没存在，可以不解析，如果解析了，会出现bug --- 相比于v-show的优势
+    问题何时会出现？ --- 三层表达式解析的时候
+  (2)swiper -- 滑动库
+      利用callback和$nextTick实现在列表显示之后进行滑动
+      在action中传入cb ，cb && cb()    ---现在不执行，后面才会执行
+      mounted:初始化
+      $nextTick：状态改变时
+
+      注意：ref --- 标识，相当于id
+
 
 

@@ -12,6 +12,7 @@ Vue.component('HeaderTop', HeaderTop)
 Vue.component(Button.name, Button)
 
 import './mock/mockServer'
+import './filters'
 
 export default new Vue({
   el:'#app',

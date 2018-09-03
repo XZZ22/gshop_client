@@ -2,11 +2,11 @@
   <div class="msite">
     <!--首页头部-->
     <HeaderTop :title="address.name">
-      <a class="header_search" slot="left">
+      <a class="header_search" slot="left" @click="$router.push('/search')">
         <i class="iconfont icon-sousuo"></i>
       </a>
       <a class="header_login" slot="right">
-        <span class="header_login_text">登录|注册</span>
+        <span class="header_login_text" @click="$router.push('/login')">登录|注册</span>
       </a>
     </HeaderTop>
     <!--首页导航-->

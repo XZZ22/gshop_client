@@ -8,7 +8,8 @@ import {
   RECEIVE_INFO,
   RECEIVE_RATINGS,
   INCREMENT_FOOD_COUNT,
-  DECREMENT_FOOD_COUNT
+  DECREMENT_FOOD_COUNT,
+  CLEAR_CART
 } from "./mutation-types";
 
 import {
@@ -89,12 +90,13 @@ export default {
   },
 
   //异步获取评分信息
-  async getShopRatings({commit}){
+  async getShopRatings({commit},cb){
     const result = await reqShopRatings()
     if(result.code ===0){
       const ratings = result.data
       commit(RECEIVE_RATINGS,{ratings})
     }
+    cb && cb()
   },
 
   async updateFoodCount({commit},{food,isAdd}){
@@ -103,5 +105,12 @@ export default {
     }else{
       commit(DECREMENT_FOOD_COUNT,{food})
     }
+  },
+
+
+
+  //同步清空列表中的数据
+  clearCart({commit}){
+    commit(CLEAR_CART)
   }
 }

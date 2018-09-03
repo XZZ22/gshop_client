@@ -8,7 +8,8 @@ import {
   RECEIVE_INFO,
   RECEIVE_RATINGS,
   INCREMENT_FOOD_COUNT,
-  DECREMENT_FOOD_COUNT
+  DECREMENT_FOOD_COUNT,
+  CLEAR_CART
 } from "./mutation-types";
 
 import Vue from 'vue'
@@ -54,5 +55,13 @@ export default {
         state.shopCart.splice(state.shopCart.indexOf(food),1)
       }
     }
+  },
+
+  [CLEAR_CART](state){
+    //foodzhong中的也要清空
+    state.shopCart.forEach(food=>{
+      food.count = 0
+    })
+    state.shopCart = []
   }
 }
